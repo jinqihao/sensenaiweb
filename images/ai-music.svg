@@ -1,0 +1,5 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="#F5F5F7"/>
+    <circle cx="400" cy="200" r="150" fill="#32ADE6"/>
+    <text x="400" y="210" font-family="SF Pro Display, Arial" font-size="48" fill="white" text-anchor="middle" font-weight="600">AI音乐</text>
+</svg> 
