@@ -50,4 +50,51 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSlider();
         slideInterval = setInterval(autoSlide, 5000);
     });
+
+    // AI聊天机器人拖拽功能
+    const aiChat = document.getElementById('aiChat');
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    aiChat.addEventListener('mousedown', startDragging);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDragging);
+
+    function startDragging(e) {
+        // 排除输入框和按钮的点击
+        if (!e.target.closest('input') && !e.target.closest('button')) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+            isDragging = true;
+            aiChat.style.cursor = 'grabbing';
+        }
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+
+            // 防止拖出视窗
+            const bounds = aiChat.getBoundingClientRect();
+            const maxX = window.innerWidth - bounds.width;
+            const maxY = window.innerHeight - bounds.height;
+
+            xOffset = Math.min(Math.max(0, currentX), maxX);
+            yOffset = Math.min(Math.max(0, currentY), maxY);
+
+            aiChat.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        }
+    }
+
+    function stopDragging() {
+        isDragging = false;
+        aiChat.style.cursor = 'move';
+    }
 }); 
